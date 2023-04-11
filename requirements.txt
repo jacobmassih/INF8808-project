@@ -14,6 +14,8 @@ dash-core-components==2.0.0
     # via dash
 dash-html-components==2.0.0
     # via dash
+dash-bootstrap-components==1.4.1
+    # via dash
 dash-table==5.0.0
     # via dash
 flask==2.2.2

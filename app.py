@@ -7,8 +7,8 @@ import dash_bootstrap_components as dbc
 import preprocess as preprocess
 import viz1.bar_chart as bar_chart
 import viz2.heatmap as heatmap
-from html_component import viz1_html, viz3_html, welcome_page
-from viz3.bubble_chart import get_default_fig, get_fig
+import viz3.bubble_chart as bubble_chart
+import html_component as html_component
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = "Projet 8808"
@@ -32,8 +32,8 @@ def preprocess_viz3():
 
 def app_layout(fig):
     return html.Div(className='app-page', children=[
-        viz1_html(fig), viz3_html(
-            get_fig(viz3_data))
+        html_component.viz1_html(fig), html_component.viz3_html(
+            bubble_chart.get_fig(viz3_data))
     ])
 
 
@@ -58,9 +58,9 @@ def update_figure(value):
     # determine which section of the scrollytelling the user is in
     # and update the figure based on that
     if value < 0.5:
-        return get_fig(viz3_data)
+        return bubble_chart.get_fig(viz3_data)
     else:
-        return get_default_fig()
+        return bubble_chart.get_default_fig()
 
 # DATA
 viz1_data = preprocess_viz1()
@@ -70,14 +70,14 @@ viz3_data = preprocess_viz3()
 # CHARTS
 viz1 = bar_chart.init_figure()
 # viz2 = heatmap.create_heatmap(viz2_data)
-viz3 = get_fig(viz3_data)
+viz3 = bubble_chart.get_fig(viz3_data)
 
 # Define the app layout
 app.layout = html.Div(children=[
-    welcome_page(),
-    viz1_html(viz1),
-    # viz2_html(viz2),
-    viz3_html(viz3),
+    html_component.welcome_page(),
+    html_component.viz1_html(viz1),
+    # html_component.viz2_html(viz2),
+    html_component.viz3_html(viz3),
 
     # scroll(
     #     id='scroll',
