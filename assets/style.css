@@ -1,0 +1,75 @@
+:root {
+    --blue: #43A1D5;
+    --gold: #D5B048;
+    --navy_blue: #173E69;
+
+    --light_blue: #AEDDF8;
+    --light_gold: #F3DFA5;
+    --light_navy_blue: #3772B4;
+
+    --background: #FFFFFF;
+    --onBackground: #000000;
+}
+
+.upper-part {
+    background-color: var(--navy_blue);
+}
+
+.welcome-title {
+    text-align: center;
+    color: var(--background);
+    font-family: 'Oswald';
+    font-size: 3rem;
+    position: relative;
+    padding: 6rem 10rem;
+}
+
+.lower-part{
+    background-color: var(--gold);
+    padding: 3rem 0;
+}
+
+.welcome-text {
+    text-align: center;
+    color: var(--onBackground);
+    font-family: 'Oswald';
+    font-size: 3rem;
+}
+
+.page-container {
+    padding: 2rem 2rem 0 2rem;
+    text-align: center;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-container {
+    flex: 1 1 auto;
+}
+
+.radio-group {
+    margin-bottom: 3rem;
+    flex: 0 1 auto;
+}
+
+.radio-group-text {
+    margin-bottom: 1rem;
+}
+
+.metric-text {
+    display: none;
+}
+
+.radio-container {
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.radio-items {
+    display: flex;
+    flex-direction: row;
+}
