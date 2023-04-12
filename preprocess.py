@@ -42,5 +42,7 @@ def viz5_get_stats(shooting_df):
 
     df = df.drop(df[df['Gls'] == 0].index)
     df = df.drop(df.tail(2).index)
+    
     df = df.sort_values(['nGls', 'Gls'])
+
     return df

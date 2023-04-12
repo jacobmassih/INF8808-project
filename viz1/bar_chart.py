@@ -20,6 +20,7 @@ def init_figure():
         # layout['yaxis']['showgrid'] = False
     )
 
+    fig.update_yaxes(title_text='Values',)
 
     return fig
 
