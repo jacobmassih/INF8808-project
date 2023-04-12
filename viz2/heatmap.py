@@ -1,21 +1,17 @@
-import plotly.graph_objs as go
+import plotly.express as px
 
 def create_heatmap(heatmap_data):
-    # Create the heatmap trace
-    heatmap_trace = go.Heatmap(z=heatmap_data.values,
-                               x=heatmap_data.columns,
-                               y=heatmap_data.index,
-                               colorscale="Greens")
-
-    # Set the layout for the plot
-    layout = go.Layout(title="Argentina Performance Metrics Heatmap",
-                       xaxis=dict(title="Metrics"),
-                       yaxis=dict(title="Opponent"))
-
-    # Create the figure and add the trace and layout
-    fig = go.Figure(data=[heatmap_trace], layout=layout)
-    fig.update_xaxes(side='top')
-
+    fig = px.imshow(heatmap_data.values,
+                    x=heatmap_data.columns,
+                    y=heatmap_data.index,
+                    color_continuous_scale='Greens',
+                    text_auto=True, aspect="auto",
+                    labels= dict(x='Metrics', y='Opponent')
+                    )
+    fig.update_layout(title="Argentina Performance Metrics Heatmap",
+                      xaxis=dict(side='top'))
     return fig
+
+
 
 

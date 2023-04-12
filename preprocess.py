@@ -62,6 +62,12 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     # Return the sorted heatmap data
     return heatmap_data_sorted
 
+def viz2_get_MatchReport_for_lollipop(MatchReport_df):
+    # Create a new column that groups the data by opponent and calculates the average
+   # MatchReport_df["Average Performance"] = MatchReport_df.iloc[:, 1:].mean(axis=1)
+    lollipop_data = MatchReport_df
+    print(lollipop_data )
+    return lollipop_data 
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):

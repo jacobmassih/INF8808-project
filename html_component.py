@@ -73,17 +73,18 @@ def viz1_html(fig):
         ])
     ])
     
-def viz2_html(fig):
+def viz2_html_heatmap(fig):
     markdown_title="""
-    ## Against which team did Argentina have the least difficulty during the 2022 World Cup?
+    ## Which team  did Argentina perform the best against ?
     """
     markdown_text = """
      
-    This data visualization compares Argentina's performance against its opponents during the 2022 World Cup, 
-    focusing on four key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. Overall, Argentina had a strong performance in the tournament, winning X out of Y matches and scoring Z goals.
+    This data visualization show Argentina's performance against its opponents during the 2022 World Cup, 
+    focusing on sixfour key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. 
+    Overall, Argentina had a strong performance in the tournament, winning 6 out of 7 matches and scoring 23 goals.
     
     
-    The distance calculation can be effective in identifying the opponent which the Argentina team has the most difficulty to win against.
+    The distance calculation is effective in identifying the opponent which the Argentina team has the most difficulty to win against.
     By using z-scores to standardize the selected features and then computing the distance from the reference point 
     (in this case, the mean values of the selected features), we was able to identify the opponents that are furthest from the mean and therefore more challenging for Argentina to beat.
     The larger the distance, the more difficult it may be for Argentina to win against that opponent based on the selected features.
@@ -93,8 +94,6 @@ def viz2_html(fig):
     The team's passing accuracy was also quite high, with an average of 84%. 
     When it came to shots on target, Argentina also performed well, with an average of 44,29%.
 
-    Overall, this data suggests that Argentina had a solid performance in the 2022 World Cup, but faced varying levels of difficulty depending on the opponent. 
-    Going forward, the team may want to focus on maintaining its strong possession and passing accuracy stats, while also developing strategies to improve its performance in matches where opponents are able to challenge its dominance."
     """
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
@@ -103,6 +102,48 @@ def viz2_html(fig):
                 dcc.Markdown(children=markdown_text),
                 dcc.Graph(
                     id='Heatmap',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                )
+            ])
+        ])
+    ])
+    
+def viz2_html_lollipop(fig):
+    markdown_title="""
+    ## How does the Argentine team compare to its opponents in terms of performance at the 2022 World Cup?
+    """
+    markdown_text = """
+     
+    This data visualization show Argentina's performance against its opponents during the 2022 World Cup, 
+    focusing on sixfour key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. 
+    Overall, Argentina had a strong performance in the tournament, winning 6 out of 7 matches and scoring 23 goals.
+    
+    
+    The distance calculation is effective in identifying the opponent which the Argentina team has the most difficulty to win against.
+    By using z-scores to standardize the selected features and then computing the distance from the reference point 
+    (in this case, the mean values of the selected features), we was able to identify the opponents that are furthest from the mean and therefore more challenging for Argentina to beat.
+    The larger the distance, the more difficult it may be for Argentina to win against that opponent based on the selected features.
+    The heatmap is sorted base on this Distance value that is calculate  with the stats library from scipy.
+    
+    In terms of possession, Argentina generally dominated its opponents, with an average possession of 57,43%. 
+    The team's passing accuracy was also quite high, with an average of 84%. 
+    When it came to shots on target, Argentina also performed well, with an average of 44,29%.
+
+    """
+    return html.Div(className='page-container', children=[
+        html.Div(className='app-container', children=[
+            html.Div(className='graph-container', children=[
+                dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(
+                    id='lolipop',
                     figure=fig,
                     config=dict(
                         scrollZoom=False,
