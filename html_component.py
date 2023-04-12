@@ -75,11 +75,11 @@ def viz1_html(fig):
     
 def viz3_html(fig):
     markdown_title="""
-    ## Bubble Chart
+    ## Which offensive player contributed the most to Argentina's success?
     """
 
     markdown_text = """
-    Which offensive player contributed the most to Argentina's success? 
+     
     Argentina is known for their offensive prowess with world-class players such as Lionel Messi and Angel Di Maria dominating any pitch they compete on. 
     In such manners, we have chosen 3 key metrics that best represent a well rounded attacking player.
     
@@ -90,11 +90,12 @@ def viz3_html(fig):
     
     Gls (Goals): Number of goals scored by the player (penalty and non-penalties included)
     """
+    # pour les fonts, checker dans asssets. on a 4 fonts dans le projet. si vous voulez dautres, faut download.
     style = {'font-family': 'Arial, sans-serif', 'font-size': '16px', 'text-align' : 'left'}
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
-            dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_title),
                 dcc.Markdown(children=markdown_text),
                 dcc.Graph(
                     id='bubble-chart',
@@ -110,7 +111,31 @@ def viz3_html(fig):
             ])
         ])
     ])
-
+    
+# vy - i'll be right back if yall dont sleep
+def viz4_html(fig):
+    markdown_text = """
+    ## VIZ4 
+    """
+    return html.Div(className='page-container', children=[
+        html.Div(className='app-container', children=[
+            html.Div(className='graph-container', children=[
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(
+                    id='radar-chart',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                ),
+            ])
+        ])
+    ])
+    
 def viz5_html(fig):
     markdown_text = """
     ## Who are the most efficient scorers?

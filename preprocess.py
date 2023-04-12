@@ -36,12 +36,30 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     df = df[df['KP'] != 0]
     return df
 
-def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df):
-    # prend SoT%, squad total de Gls/ squad total Sh de shooting_df
-    # prend Cmp% de passing_df
-    # prend TklW et Tkl faire TkLW/TkL de def_act_df
-    # prend Save% de goalkeeping_df
-    return
+def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df):
+    sot = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['SoT%']]
+    
+    cmp = passing_df.loc[passing_df['Player'] == 'Squad Total', ['Cmp%']]
+    
+    tkl_tklw = def_act_df.loc[def_act_df['Player'] == 'Squad Total', ['Tkl', 'TklW']]
+    tkl_tklw['TklW/Tkl'] = tkl_tklw['TklW'] / tkl_tklw['Tkl'] * 100
+    tkl_tklw = tkl_tklw.drop(['Tkl', 'TklW'], axis=1)
+    
+    save = goalkeeping_df.loc[goalkeeping_df['Player'] == 'Squad Total', ['Save%']]
+    save = save.reset_index(drop=True)
+    
+    poss = possession_df['Poss']
+    poss = possession_df['Poss'].iloc[11]
+    
+    conversion = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['Gls', 'Sh']]
+    conversion['Conversion'] = conversion['Gls'] / conversion['Sh'] * 100
+    conversion = conversion.drop(['Gls', 'Sh'], axis=1)
+    
+    df = pd.concat([sot, cmp, tkl_tklw, conversion], axis=1).reset_index(drop=True)
+    df = pd.concat([df,save], axis=1)
+    df['Poss'] = poss
+    
+    return df
 
 def viz5_get_stats(shooting_df):
     df = pd.DataFrame(shooting_df[['Player','Sh', 'Gls']])
