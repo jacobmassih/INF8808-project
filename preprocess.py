@@ -23,12 +23,15 @@ def viz1_get_results(scores_and_fixtures_df):
 def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     
     #Drop column not need for the heatmap
-    heatmap_data = MatchReport_df.drop(['Possession Against Argentina','Passing Accuracy Against Argentina','Shots On Target Against Argentina','Saves Against Argentina','Cards For Opponent','Goal Against Argentina'], axis=1)
+    heatmap_data = MatchReport_df.drop(['Possession Against Argentina','Passing Accuracy Against Argentina','Shots On Target Against Argentina','Saves Against Argentina','Goal For Argentina ','Goal per Shot Against Argentina'], axis=1)
     
-    # Select the columns to be used in the heatmap and rename them
-    #heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina", "Cards For Argentina", "Goal For Argentina "]]
+    #Transfor column Goal per Shot for Argentina to have the percentage as all data here are in percentage
+    heatmap_data['Goal per Shot For Argentina'] = heatmap_data['Goal per Shot For Argentina'].apply(lambda x: x * 100)
+    
+    # rename the columns to be used in the heatmap 
     heatmap_data = heatmap_data.rename(columns=lambda x: x.replace(' For Argentina', ''))
-    
+  
+    """  
     # Select all columns except the first (which is Opponent)
     cols_to_zscore = heatmap_data.columns[1:]
     
@@ -49,15 +52,17 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     
     # Add the distance column to the heatmap_data dataframe
     heatmap_data['Distance'] = distance
-    
+    """
     # Set the Opponent column as the index for the heatmap data
     heatmap_data = heatmap_data.set_index('Opponent')
     
     # Sort the heatmap data by distance in descending order
-    heatmap_data_sorted = heatmap_data.sort_values(by='Distance', ascending=False)
+    # heatmap_data_sorted = heatmap_data.sort_values(by='Distance', ascending=False)
+    heatmap_data_sorted = heatmap_data.sort_values(by='Goal Against Argentina', ascending=False)
     
     # drop the 'Distance' column before passing it to the heatmap
-    heatmap_data_sorted = heatmap_data_sorted.drop('Distance', axis=1)
+    # heatmap_data_sorted = heatmap_data_sorted.drop('Distance', axis=1)
+    heatmap_data_sorted = heatmap_data_sorted.drop('Goal Against Argentina', axis=1)
     
     # Return the sorted heatmap data
     return heatmap_data_sorted
