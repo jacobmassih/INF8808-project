@@ -15,10 +15,11 @@ def init_figure():
         template=pio.templates['viz1_template'],
         dragmode=False,
         xaxis_title="Opponent",
-        yaxis_showgrid=False
+        yaxis_showgrid=False,
         
         # layout['yaxis']['showgrid'] = False
     )
+
 
     return fig
 

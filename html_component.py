@@ -22,10 +22,10 @@ def welcome_page():
 def viz1_html(fig):
     markdown_text = """
     ## Introduction
-    Welcome to my scrollytelling!
+    Welcome!
 
     ## Bar Chart
-    In this section, we'll take a look at a bar chart.
+    What are Argentina's National Team's results from the 2022 World Cup?
 
     """
     return html.Div(className='page-container', children=[
@@ -80,7 +80,7 @@ def viz1_html(fig):
 def viz3_html(fig):
     markdown_text = """
     ## Bubble Chart
-    In this section, we'll take a look at a bubble chart.
+    Who are the players that have contributed the most to the team's success?
 
     """
     return html.Div(className='page-container', children=[
@@ -88,6 +88,21 @@ def viz3_html(fig):
             html.Div(className='graph-container', children=[
                 dcc.Markdown(children=markdown_text),
                 dcc.Graph(id='bubble-chart', figure=fig)
+            ])
+        ])
+    ])
+
+def viz5_html(fig):
+    markdown_text = """
+    ## Horizontal Bar Chart
+    Who are the most efficient scorers?
+
+    """
+    return html.Div(className='page-container', children=[
+        html.Div(className='app-container', children=[
+            html.Div(className='graph-container', children=[
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(id='horizontal-bar-chart', figure=fig)
             ])
         ])
     ])

@@ -3,8 +3,7 @@
 '''
 import plotly.graph_objects as go
 import plotly.io as pio
-
-from assets.shared_styles.colors import PRIMARY_COLORS, BACKGROUND_COLOR
+import assets.shared_styles.colors as colors
 
 def create_template():
     '''
@@ -34,7 +33,7 @@ def create_template():
     pio.templates['viz1_template'] = go.layout.Template()
     
     pio.templates['viz1_template'].data.bar = [
-        go.Bar(marker_color = PRIMARY_COLORS[color]) for color in PRIMARY_COLORS
+        go.Bar(marker_color = colors.PRIMARY_COLORS[color]) for color in colors.PRIMARY_COLORS
     ]
     
     # TODO: viz2_template, etc

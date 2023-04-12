@@ -35,3 +35,12 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     df = df[df['Pos'].isin(['FW', 'MFFW', 'MF'])]
     df = df[df['KP'] != 0]
     return df
+
+def viz5_get_stats(shooting_df):
+    df = pd.DataFrame(shooting_df[['Player','Sh', 'Gls']])
+    df['nGls'] = shooting_df['Sh'] - shooting_df['Gls']
+
+    df = df.drop(df[df['Gls'] == 0].index)
+    df = df.drop(df.tail(2).index)
+    df = df.sort_values(['nGls', 'Gls'])
+    return df
