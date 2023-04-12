@@ -12,12 +12,10 @@ def init_figure():
     template.create_template()
 
     fig.update_layout(
-        template=pio.templates['viz1_template'],
         dragmode=False,
         xaxis_title="Opponent",
         yaxis_showgrid=False,
-        
-        # layout['yaxis']['showgrid'] = False
+        template=pio.templates['simple_white+viz1_template'],
     )
 
     fig.update_yaxes(title_text='Values',)

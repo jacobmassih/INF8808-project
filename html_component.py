@@ -21,8 +21,7 @@ def welcome_page():
 
 def viz1_html(fig):
     markdown_text = """
-    ## Bar Chart
-    What are Argentina's National Team's results from the 2022 World Cup?
+    ## What are Argentina's National Team's results from the 2022 World Cup?
 
     """
     return html.Div(className='page-container', children=[
@@ -76,8 +75,7 @@ def viz1_html(fig):
     
 def viz3_html(fig):
     markdown_text = """
-    ## Bubble Chart
-    Who are the players that have contributed the most to the team's success?
+    ## Who are the players that have contributed the most to the team's success?
 
     """
     return html.Div(className='page-container', children=[
@@ -101,8 +99,7 @@ def viz3_html(fig):
 
 def viz5_html(fig):
     markdown_text = """
-    ## Horizontal Bar Chart
-    Who are the most efficient scorers?
+    ## Who are the most efficient scorers?
 
     """
     return html.Div(className='page-container', children=[
