@@ -13,7 +13,7 @@ def get_horizontal_bar_chart(df):
         x= df['nGls'],
         name='Missed Shots',
         orientation='h',
-        hovertemplate= hover_template.get_hover_template_missed_shots_viz5(),
+        hovertemplate= hover_template.get_hover_template_viz5(),
         marker=dict(
             color=colors.SECONDARY_COLORS['light_gold'],
         )
@@ -24,7 +24,7 @@ def get_horizontal_bar_chart(df):
         x= df['Gls'],
         name='Goals',
         orientation='h',
-        hovertemplate= hover_template.get_hover_template_goals_viz5(),
+        hovertemplate= hover_template.get_hover_template_viz5(),
         marker=dict(
             color=colors.SECONDARY_COLORS['light_navy_blue'],
         )
