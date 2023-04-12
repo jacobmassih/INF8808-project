@@ -34,7 +34,8 @@ def get_horizontal_bar_chart(df):
         barmode='stack',
         template=pio.templates['simple_white'],
         hovermode='y unified',
-        dragmode=False
+        dragmode=False,
+        legend_title_text='Shots'
     )
     
     fig.update_xaxes(

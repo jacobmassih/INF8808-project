@@ -16,6 +16,7 @@ def init_figure():
         xaxis_title="Opponent",
         yaxis_showgrid=False,
         template=pio.templates['simple_white+viz1_template'],
+        legend_title_text='Type'
     )
 
     fig.update_yaxes(title_text='Values',)
