@@ -73,6 +73,42 @@ def viz1_html(fig):
         ])
     ])
     
+def viz2_html(fig):
+    markdown_title="""
+    ## Against which team did Argentina have the least difficulty during the 2022 World Cup?
+    """
+    markdown_text = """
+     
+    This data visualization compares Argentina's performance against its opponents during the 2022 World Cup, 
+    focusing on four key metrics: possession, passing accuracy, shots on target, and saves. Overall, Argentina had a strong performance in the tournament, winning X out of Y matches and scoring Z goals.
+    
+    In terms of possession, Argentina generally dominated its opponents, with an average possession of 57,43%. 
+    The team's passing accuracy was also quite high, with an average of 84%. 
+    When it came to shots on target, Argentina also performed well, with an average of 44,29%.
+
+    Overall, this data suggests that Argentina had a solid performance in the 2022 World Cup, but faced varying levels of difficulty depending on the opponent. 
+    Going forward, the team may want to focus on maintaining its strong possession and passing accuracy stats, while also developing strategies to improve its performance in matches where opponents are able to challenge its dominance."
+    """
+    return html.Div(className='page-container', children=[
+        html.Div(className='app-container', children=[
+            html.Div(className='graph-container', children=[
+                dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(
+                    id='Heatmap',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                )
+            ])
+        ])
+    ])
+    
 def viz3_html(fig):
     markdown_title="""
     ## Which offensive player contributed the most to Argentina's success?

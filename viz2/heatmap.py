@@ -1,26 +1,21 @@
-import pandas as pd
 import plotly.graph_objs as go
 
-def create_heatmap(pivot_table):
- 
-    # Create a list of lists for the data
-    table_data = []
-    for row in pivot_table.itertuples():
-        table_data.append(list(row[1:]))
+def create_heatmap(heatmap_data):
+    # Create the heatmap trace
+    heatmap_trace = go.Heatmap(z=heatmap_data.values,
+                               x=heatmap_data.columns,
+                               y=heatmap_data.index,
+                               colorscale="Greens")
 
-    # Create a list of column names
-    column_names = list(pivot_table.columns)
+    # Set the layout for the plot
+    layout = go.Layout(title="Argentina Performance Metrics Heatmap",
+                       xaxis=dict(title="Metrics"),
+                       yaxis=dict(title="Opponent"))
 
-    # Create color scale for the heatmap
-    color_scale = [[0, '#FFFFFF'], [0.2, '#FFCCCC'], [0.5, '#FF6666'], [0.8, '#FF0000'], [1, '#660000']]
+    # Create the figure and add the trace and layout
+    fig = go.Figure(data=[heatmap_trace], layout=layout)
+    fig.update_xaxes(side='top')
 
-    # Create the table-like heatmap
-    heatmap = go.Table(header=dict(values=column_names),
-                       cells=dict(values=table_data, fill=dict(colorscale=color_scale, reversescale=True),
-                                  font=dict(color='#000000'), format=[None] + ['{:.1f}%'] * 3 + ['{:.1f}']),
-                       columnwidth=[1] * 5)
-
-    # Set layout and return the heatmap
-    layout = go.Layout(title="Comparison of Argentina's performance against its opponents")
-    fig = go.Figure(data=[heatmap], layout=layout)
     return fig
+
+

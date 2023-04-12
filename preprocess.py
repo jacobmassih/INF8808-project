@@ -19,11 +19,11 @@ def viz1_get_results(scores_and_fixtures_df):
 
     return df
 
-# def viz2_get_results(MatchReport_df):
-#     # Create a pivot table with mean values for each statistic
-#     pivot_table = pd.pivot_table(MatchReport_df, values=["Possession", "Passing Accuracy", "Shots on Target", "Saves"],
-#                     index="Opponent", aggfunc="mean")
-#     return pivot_table
+def viz2_get_MatchReport_for_heatmap(MatchReport_df):
+    heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina"]]
+    heatmap_data = heatmap_data.set_index('Opponent')
+    print(heatmap_data)
+    return heatmap_data
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
