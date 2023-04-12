@@ -60,8 +60,6 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     return heatmap_data_sorted
 
 
-
-
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     df = pd.concat([shooting_df, passing_df, gca_df], axis=1)
     df = df.loc[:, ~df.columns.duplicated()]
