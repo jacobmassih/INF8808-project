@@ -21,60 +21,18 @@ def viz1_get_results(scores_and_fixtures_df):
     return df
 
 def viz2_get_MatchReport_for_heatmap(MatchReport_df):
-    
-    #Drop column not need for the heatmap
     heatmap_data = MatchReport_df.drop(['Possession Against Argentina','Passing Accuracy Against Argentina','Shots On Target Against Argentina','Saves Against Argentina','Goal per Shot Against Argentina'], axis=1)
-    
-    #Transfor column Goal per Shot for Argentina to have the percentage as all data here are in percentage
     heatmap_data['Goal per Shot For Argentina'] = heatmap_data['Goal per Shot For Argentina'].apply(lambda x: x * 100)
-    
-    # rename the columns to be used in the heatmap 
+    heatmap_data['Goal Difference'] = heatmap_data['Goal Against Argentina'] - heatmap_data['Goal For Argentina']
+    heatmap_data= heatmap_data.drop(['Goal For Argentina', 'Goal Against Argentina'], axis=1)
     heatmap_data = heatmap_data.rename(columns=lambda x: x.replace(' For Argentina', ''))
-  
-    """  
-    # Select all columns except the first (which is Opponent)
-    cols_to_zscore = heatmap_data.columns[1:]
-    
-    # Compute z-scores for the selected columns
-    z_scores = stats.zscore(heatmap_data[cols_to_zscore])
-    
-    # Replace any negative values in the z-scores with 0
-    positions = pd.DataFrame(np.maximum(z_scores, 0))
-    
-    # Create a list of weights with the same length as the number of selected columns
-    weights = [1] * len(cols_to_zscore)
-    
-    # Multiply each position by its weight
-    weight_positions = positions.multiply(weights, axis=1)
-    
-    # Compute the distance for each row by summing the weighted positions
-    distance = weight_positions.sum(axis=1)
-    
-    # Add the distance column to the heatmap_data dataframe
-    heatmap_data['Distance'] = distance
-    """
-    # Set the Opponent column as the index for the heatmap data
     heatmap_data = heatmap_data.set_index('Opponent')
-    print("heatmap before sorted")
-    print(heatmap_data)
-    
-    # Sort the heatmap data by distance in descending order
-    # heatmap_data_sorted = heatmap_data.sort_values(by='Distance', ascending=False)
-    heatmap_data_sorted = heatmap_data.sort_values(by=['Goal','Goal Against Argentina'], ascending=False)
-
-    
-    # drop the 'Distance' column before passing it to the heatmap
-    # heatmap_data_sorted = heatmap_data_sorted.drop('Distance', axis=1)
-    heatmap_data_sorted = heatmap_data_sorted.drop('Goal','Goal Against Argentina', axis=1)
-    
-    # Return the sorted heatmap data
+    heatmap_data_sorted = heatmap_data.sort_values(by=('Goal Difference'), ascending=False)
+    heatmap_data_sorted = heatmap_data_sorted.drop('Goal Difference', axis=1)
     return heatmap_data_sorted
 
 def viz2_get_MatchReport_for_lollipop(MatchReport_df):
-    # Create a new column that groups the data by opponent and calculates the average
-   # MatchReport_df["Average Performance"] = MatchReport_df.iloc[:, 1:].mean(axis=1)
     lollipop_data = MatchReport_df
-    print(lollipop_data )
     return lollipop_data 
 
 
