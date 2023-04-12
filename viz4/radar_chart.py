@@ -16,13 +16,15 @@ def get_fig(data):
     
     fig = go.Figure()
 
-    fig.add_trace(go.Scatterpolar(
-        r=data,
-        theta=categories,
-        fill='toself',
-        line=dict(color='#000000'),
-        subplot='polar1'
-    ))
+    fig.add_trace(
+        go.Scatterpolar(
+            r=data,
+            theta=categories,
+            fill='toself',
+            line=dict(color='#000000'),
+            subplot='polar1'
+        )
+    )
 
     fig.update_layout(
         polar=dict(

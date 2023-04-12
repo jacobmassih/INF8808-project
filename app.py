@@ -26,13 +26,6 @@ POSESSION = pd.read_csv('./data/possession.csv')
 #     MatchReport_df = pd.read_excel('./data/MatchReport.xlsx')
 #     return preprocess.viz2_get_results(MatchReport_df)
 
-def app_layout(fig):
-    return html.Div(className='app-page', children=[
-        html_component.viz1_html(fig), html_component.viz3_html(
-            bubble_chart.get_fig(viz3_data))
-    ])
-
-# TODO : viz2_layout, viz3_layout, etc...
 @app.callback(
     [Output('bar-chart', 'figure'), Output('mode', 'children')],
     [Input('radio-items', 'value')],
@@ -44,7 +37,6 @@ def radio_updated(mode, figure):
 
     return new_fig, mode
 
-
 @app.callback(
     Output('bubble-chart', 'figure'),
     [Input('scroller', 'value')]
@@ -54,6 +46,7 @@ def update_figure(value):
         return bubble_chart.get_fig(viz3_data)
     else:
         return bubble_chart.get_default_fig()
+
 
 # DATA
 viz1_data = preprocess.viz1_get_results(SCORES_AND_FIXTURES)
@@ -68,6 +61,7 @@ viz1 = bar_chart.init_figure()
 viz3 = bubble_chart.get_fig(viz3_data)
 viz4 = radar_chart.get_fig(viz4_data)
 viz5 = horizontal_bar_chart.get_horizontal_bar_chart(viz5_data)
+
 
 # Define the app layout
 app.layout = html.Div(children=[

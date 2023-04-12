@@ -27,7 +27,6 @@ def viz1_get_results(scores_and_fixtures_df):
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
-
     df = pd.concat([shooting_df, passing_df, gca_df], axis=1)
     df = df.loc[:, ~df.columns.duplicated()]
     df = df[['Player', 'Pos', 'Gls', 'KP', 'GCA']]
@@ -35,6 +34,7 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     df = df[df['Pos'].isin(['FW', 'MFFW', 'MF'])]
     df = df[df['KP'] != 0]
     return df
+
 
 def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df):
     sot = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['SoT%']]
@@ -60,6 +60,7 @@ def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possessi
     df['Poss'] = poss
     
     return df
+
 
 def viz5_get_stats(shooting_df):
     df = pd.DataFrame(shooting_df[['Player','Sh', 'Gls']])

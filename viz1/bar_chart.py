@@ -6,7 +6,6 @@ import template as template
 import hover_template
 
 def init_figure():
-    
     fig = go.Figure()
     
     template.create_template()
@@ -24,7 +23,6 @@ def init_figure():
     return fig
 
 def draw(fig, data, mode):
-
     fig = go.Figure(fig)
 
     if len(fig.data) != 0:
@@ -54,7 +52,6 @@ def draw(fig, data, mode):
     return fig
 
 def update_y_axis(fig, mode):
-
     fig = go.Figure(fig)
     
     fig.update_layout(
