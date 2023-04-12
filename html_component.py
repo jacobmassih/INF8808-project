@@ -100,7 +100,6 @@ def viz3_html(fig):
 def viz5_html(fig):
     markdown_text = """
     ## Who are the most efficient scorers?
-
     """
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[

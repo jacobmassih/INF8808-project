@@ -35,8 +35,12 @@ def get_horizontal_bar_chart(df):
         template=pio.templates['simple_white'],
         hovermode='y unified',
         dragmode=False
-        )
-
+    )
+    
+    fig.update_xaxes(
+        title_text='Number of shots'
+    )
+    
     return fig
 
     
