@@ -36,6 +36,13 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     df = df[df['KP'] != 0]
     return df
 
+def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df):
+    # prend SoT%, squad total de Gls/ squad total Sh de shooting_df
+    # prend Cmp% de passing_df
+    # prend TklW et Tkl faire TkLW/TkL de def_act_df
+    # prend Save% de goalkeeping_df
+    return
+
 def viz5_get_stats(shooting_df):
     df = pd.DataFrame(shooting_df[['Player','Sh', 'Gls']])
     df['nGls'] = shooting_df['Sh'] - shooting_df['Gls']

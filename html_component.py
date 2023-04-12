@@ -78,15 +78,28 @@ def viz1_html(fig):
     ])
     
 def viz3_html(fig):
-    markdown_text = """
+    markdown_title="""
     ## Bubble Chart
-    Who are the players that have contributed the most to the team's success?
-
     """
+
+    markdown_text = """
+    Which offensive player contributed the most to Argentina's success? 
+    Argentina is known for their offensive prowess with world-class players such as Lionel Messi and Angel Di Maria dominating any pitch they compete on. 
+    In such manners, we have chosen 3 key metrics that best represent a well rounded attacking player.
+    
+    
+    GCA (Goal-creating actions): The last two offensive actions directly leading to a goal. These can be passes, take-ons and drawing fouls.
+
+    KP (Key passes): Passes that lead directly to a shot
+    
+    Gls (Goals): Number of goals scored by the player (penalty and non-penalties included)
+    """
+    style = {'font-family': 'Arial, sans-serif', 'font-size': '16px', 'text-align' : 'left'}
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_text),
+                dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_text, style=style),
                 dcc.Graph(id='bubble-chart', figure=fig)
             ])
         ])
