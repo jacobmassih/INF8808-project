@@ -21,11 +21,7 @@ def welcome_page():
 
 def viz1_html(fig):
     markdown_text = """
-    ## Introduction
-    Welcome!
-
-    ## Bar Chart
-    What are Argentina's National Team's results from the 2022 World Cup?
+    ## What are Argentina's National Team's results from the 2022 World Cup?
 
     """
     return html.Div(className='page-container', children=[
@@ -98,24 +94,42 @@ def viz3_html(fig):
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_title),
-                dcc.Markdown(children=markdown_text, style=style),
-                dcc.Graph(id='bubble-chart', figure=fig)
+            dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(
+                    id='bubble-chart',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                )
             ])
         ])
     ])
 
 def viz5_html(fig):
     markdown_text = """
-    ## Horizontal Bar Chart
-    Who are the most efficient scorers?
-
+    ## Who are the most efficient scorers?
     """
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
                 dcc.Markdown(children=markdown_text),
-                dcc.Graph(id='horizontal-bar-chart', figure=fig)
+                dcc.Graph(
+                    id='horizontal-bar-chart',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                ),
             ])
         ])
     ])
