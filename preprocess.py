@@ -32,8 +32,31 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     return heatmap_data_sorted
 
 def viz2_get_MatchReport_for_lollipop(MatchReport_df):
-    lollipop_data = MatchReport_df
-    return lollipop_data 
+    # Define the columns to pivot
+    cols_to_pivot = ['Possession For Argentina', 'Possession Against Argentina', 
+                     'Passing Accuracy For Argentina', 'Passing Accuracy Against Argentina', 
+                     'Shots On Target For Argentina', 'Shots On Target Against Argentina', 
+                     'Saves For Argentina', 'Saves Against Argentina', 
+                     'Goal For Argentina', 'Goal Against Argentina', 
+                     'Goal per Shot For Argentina', 'Goal per Shot Against Argentina']
+    print(MatchReport_df)
+    # Melt the data to long format
+    melted_data = pd.melt(MatchReport_df, id_vars=['Opponent'], value_vars=cols_to_pivot,
+                          var_name='Metric', value_name='Value')
+    print (melted_data)
+    melted_data['Full Name Metric'] = melted_data['Opponent'] + ' ' + melted_data['Metric']
+    melted_data= melted_data.drop(['Opponent', 'Metric'], axis=1)
+    lollipop_data = melted_data.set_index('Full Name Metric')
+    print (lollipop_data)
+    # Pivot the data to wide format
+    #pivoted_data = melted_data.pivot(index='Opponent', columns='Metric', values='Value')
+    # Reset the index
+    #pivoted_data = pivoted_data.reset_index()
+    #print(pivoted_data)
+    # Return the pivoted data
+    return lollipop_data
+
+
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
