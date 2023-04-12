@@ -22,8 +22,11 @@ def viz1_get_results(scores_and_fixtures_df):
 
 def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     
+    #Drop column not need for the heatmap
+    heatmap_data = MatchReport_df.drop(['Possession Against Argentina','Passing Accuracy Against Argentina','Shots On Target Against Argentina','Saves Against Argentina','Cards For Opponent','Goal Against Argentina'], axis=1)
+    
     # Select the columns to be used in the heatmap and rename them
-    heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina", "Cards For Argentina", "Goal For Argentina", "Distance"]]
+    #heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina", "Cards For Argentina", "Goal For Argentina "]]
     heatmap_data = heatmap_data.rename(columns=lambda x: x.replace(' For Argentina', ''))
     
     # Select all columns except the first (which is Opponent)
@@ -58,6 +61,7 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     
     # Return the sorted heatmap data
     return heatmap_data_sorted
+
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
