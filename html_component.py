@@ -80,7 +80,14 @@ def viz2_html(fig):
     markdown_text = """
      
     This data visualization compares Argentina's performance against its opponents during the 2022 World Cup, 
-    focusing on four key metrics: possession, passing accuracy, shots on target, and saves. Overall, Argentina had a strong performance in the tournament, winning X out of Y matches and scoring Z goals.
+    focusing on four key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. Overall, Argentina had a strong performance in the tournament, winning X out of Y matches and scoring Z goals.
+    
+    
+    The distance calculation can be effective in identifying the opponent which the Argentina team has the most difficulty to win against.
+    By using z-scores to standardize the selected features and then computing the distance from the reference point 
+    (in this case, the mean values of the selected features), we was able to identify the opponents that are furthest from the mean and therefore more challenging for Argentina to beat.
+    The larger the distance, the more difficult it may be for Argentina to win against that opponent based on the selected features.
+    The heatmap is sorted base on this Distance value that is calculate  with the stats library from scipy.
     
     In terms of possession, Argentina generally dominated its opponents, with an average possession of 57,43%. 
     The team's passing accuracy was also quite high, with an average of 84%. 

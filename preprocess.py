@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from scipy import stats
 
 
 def viz1_get_results(scores_and_fixtures_df):
@@ -20,10 +21,45 @@ def viz1_get_results(scores_and_fixtures_df):
     return df
 
 def viz2_get_MatchReport_for_heatmap(MatchReport_df):
-    heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina"]]
+    
+    # Select the columns to be used in the heatmap and rename them
+    heatmap_data = MatchReport_df[["Opponent", "Possession For Argentina", "Passing Accuracy For Argentina", "Shots On Target For Argentina", "Saves For Argentina", "Cards For Argentina", "Goal For Argentina", "Distance"]]
+    heatmap_data = heatmap_data.rename(columns=lambda x: x.replace(' For Argentina', ''))
+    
+    # Select all columns except the first (which is Opponent)
+    cols_to_zscore = heatmap_data.columns[1:]
+    
+    # Compute z-scores for the selected columns
+    z_scores = stats.zscore(heatmap_data[cols_to_zscore])
+    
+    # Replace any negative values in the z-scores with 0
+    positions = pd.DataFrame(np.maximum(z_scores, 0))
+    
+    # Create a list of weights with the same length as the number of selected columns
+    weights = [1] * len(cols_to_zscore)
+    
+    # Multiply each position by its weight
+    weight_positions = positions.multiply(weights, axis=1)
+    
+    # Compute the distance for each row by summing the weighted positions
+    distance = weight_positions.sum(axis=1)
+    
+    # Add the distance column to the heatmap_data dataframe
+    heatmap_data['Distance'] = distance
+    
+    # Set the Opponent column as the index for the heatmap data
     heatmap_data = heatmap_data.set_index('Opponent')
-    print(heatmap_data)
-    return heatmap_data
+    
+    # Sort the heatmap data by distance in descending order
+    heatmap_data_sorted = heatmap_data.sort_values(by='Distance', ascending=False)
+    
+    # drop the 'Distance' column before passing it to the heatmap
+    heatmap_data_sorted = heatmap_data_sorted.drop('Distance', axis=1)
+    
+    # Return the sorted heatmap data
+    return heatmap_data_sorted
+
+
 
 
 def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
