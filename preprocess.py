@@ -60,12 +60,12 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
     
     # Sort the heatmap data by distance in descending order
     # heatmap_data_sorted = heatmap_data.sort_values(by='Distance', ascending=False)
-    heatmap_data_sorted = heatmap_data.sort_values(by=[' Goal','Goal Against Argentina'], ascending=False)
+    heatmap_data_sorted = heatmap_data.sort_values(by=['Goal','Goal Against Argentina'], ascending=False)
 
     
     # drop the 'Distance' column before passing it to the heatmap
     # heatmap_data_sorted = heatmap_data_sorted.drop('Distance', axis=1)
-    heatmap_data_sorted = heatmap_data_sorted.drop(' Goal','Goal Against Argentina', axis=1)
+    heatmap_data_sorted = heatmap_data_sorted.drop('Goal','Goal Against Argentina', axis=1)
     
     # Return the sorted heatmap data
     return heatmap_data_sorted
