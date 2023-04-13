@@ -3,9 +3,6 @@ import plotly.express as px
 import plotly.io as pio
 import assets.shared_styles.colors as colors
 
-def get_default_fig():
-    return go.Figure()
-
 def get_fig(data):
     fig = px.scatter(
             data_frame=data,

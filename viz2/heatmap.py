@@ -8,9 +8,11 @@ def create_heatmap(heatmap_data):
                     text_auto=True, aspect="auto",
                     labels= dict(y='Opponent')
                     )
-    fig.update_layout(title="Argentina Performance Metrics Heatmap\n\n",
-                       xaxis=dict(side='top')
-                       )
+    fig.update_layout(
+        title="Argentina Performance Metrics Heatmap\n\n",
+        xaxis=dict(side='top'),
+        dragmode=False,
+    )
     return fig
 
 

@@ -35,23 +35,13 @@ def radio_updated(mode, figure):
 
     return new_fig, mode
 
-@app.callback(
-    Output('bubble-chart', 'figure'),
-    [Input('scroller', 'value')]
-)
-def update_figure(value):
-    if value < 0.5:
-        return bubble_chart.get_fig(viz3_data)
-    else:
-        return bubble_chart.get_default_fig()
-
 
 # DATA
 viz1_data = preprocess.viz1_get_results(SCORES_AND_FIXTURES)
 viz2_data_heatmap = preprocess.viz2_get_MatchReport_for_heatmap(MatchReport)
 viz2_data_lolipop = preprocess.viz2_get_MatchReport_for_lollipop(MatchReport)
 viz3_data = preprocess.viz3_get_offensive_stats(SHOOTING, PASSING, GOAL_AND_SHOT_CREATION)
-viz4_data = preprocess.viz4_get_stats(SHOOTING, PASSING, DEFENSIVE, GOALKEEPING, POSESSION)
+viz4_data = preprocess.viz4_get_stats(SHOOTING, PASSING, DEFENSIVE, GOALKEEPING, POSESSION, SCORES_AND_FIXTURES)
 viz5_data = preprocess.viz5_get_stats(SHOOTING)
 
 # CHARTS

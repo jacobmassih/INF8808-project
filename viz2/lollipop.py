@@ -15,7 +15,11 @@ def create_lollipop(lollipop_data):
     fig.add_trace(go.Scatter(x=[lollipop_data['Value'].min(), lollipop_data['Value'].max()], y=[lollipop_data['Full Name Metric'], lollipop_data['Full Name Metric']], mode='lines', line=dict(color='gray', dash='dash')))
 
     # add title and axis labels
-    fig.update_layout(title='Argentina World Cup Performance', xaxis_title='Metric Value', yaxis_title='Full Name Metric')
+    fig.update_layout(
+        title='Argentina World Cup Performance', 
+        xaxis_title='Metric Value', yaxis_title='Full Name Metric',
+        dragmode=False
+    )
 
     return fig
 

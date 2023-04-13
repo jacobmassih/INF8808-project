@@ -39,15 +39,12 @@ def viz2_get_MatchReport_for_lollipop(MatchReport_df):
                      'Saves For Argentina', 'Saves Against Argentina', 
                      'Goal For Argentina', 'Goal Against Argentina', 
                      'Goal per Shot For Argentina', 'Goal per Shot Against Argentina']
-    print(MatchReport_df)
     # Melt the data to long format
     melted_data = pd.melt(MatchReport_df, id_vars=['Opponent'], value_vars=cols_to_pivot,
                           var_name='Metric', value_name='Value')
-    print (melted_data)
     melted_data['Full Name Metric'] = melted_data['Opponent'] + ' ' + melted_data['Metric']
     melted_data= melted_data.drop(['Opponent', 'Metric'], axis=1)
     lollipop_data = melted_data.set_index('Full Name Metric')
-    print (lollipop_data)
     # Pivot the data to wide format
     #pivoted_data = melted_data.pivot(index='Opponent', columns='Metric', values='Value')
     # Reset the index
@@ -69,13 +66,13 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     return df
 
 
-def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df):
+def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df, s_n_f_df):
     sot = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['SoT%']]
     
     cmp = passing_df.loc[passing_df['Player'] == 'Squad Total', ['Cmp%']]
     
     tkl_tklw = def_act_df.loc[def_act_df['Player'] == 'Squad Total', ['Tkl', 'TklW']]
-    tkl_tklw['TklW/Tkl'] = tkl_tklw['TklW'] / tkl_tklw['Tkl'] * 100
+    tkl_tklw['TklW/Tkl'] = round(tkl_tklw['TklW'] / tkl_tklw['Tkl'] * 100, 1)
     tkl_tklw = tkl_tklw.drop(['Tkl', 'TklW'], axis=1)
     
     save = goalkeeping_df.loc[goalkeeping_df['Player'] == 'Squad Total', ['Save%']]
@@ -84,13 +81,13 @@ def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possessi
     poss = possession_df['Poss']
     poss = possession_df['Poss'].iloc[11]
     
-    conversion = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['Gls', 'Sh']]
-    conversion['Conversion'] = conversion['Gls'] / conversion['Sh'] * 100
-    conversion = conversion.drop(['Gls', 'Sh'], axis=1)
+    g_p_sh = s_n_f_df['G/Sh']
+    g_p_sh = s_n_f_df['G/Sh'].iloc[11] * 100
     
-    df = pd.concat([sot, cmp, tkl_tklw, conversion], axis=1).reset_index(drop=True)
+    df = pd.concat([sot, cmp, tkl_tklw], axis=1).reset_index(drop=True)
     df = pd.concat([df,save], axis=1)
     df['Poss'] = poss
+    df['G/Sh'] = g_p_sh
     
     return df
 
