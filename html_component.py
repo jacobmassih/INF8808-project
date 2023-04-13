@@ -80,7 +80,7 @@ def viz2_html_heatmap(fig):
     markdown_text = """
      
     This data visualization show Argentina's performance against its opponents during the 2022 World Cup, 
-    focusing on six key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. 
+    focusing on six key metrics: possession, passing accuracy, shots on target, saves and Goals per Shots. 
     Overall, Argentina had a strong performance in the tournament, winning 6 out of 7 matches and scoring 23 goals.
     This heatmap is sorted in order of the Top Offenders base on all matches Goals result.
     
@@ -106,17 +106,52 @@ def viz2_html_heatmap(fig):
         ])
     ])
     
+def viz2_html_heatmap2(fig):
+    markdown_title="""
+    ## Which team  did Argentina perform the best against ?
+    """
+    markdown_text = """
+     
+    This heatmap show an overview of how the Argentine team performed against each of its opponents during the 2022 World Cup.
+    It also shows the performance of each opponent against Argentina. The metrics used to compare the performance include possession, passing accuracy, shots on target, saves, and goal per shot. 
+    The Median_Performance and Mean_Performance columns show the median and mean values of the performance metrics for Argentina against each opponent.
+    It is in order of Which performance was the best base on the mean performance value.
+
+    """
+    return html.Div(className='page-container', children=[
+        html.Div(className='app-container', children=[
+            html.Div(className='graph-container', children=[
+                dcc.Markdown(children=markdown_title),
+                dcc.Markdown(children=markdown_text),
+                dcc.Graph(
+                    id='Heatmap2',
+                    figure=fig,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                )
+            ])
+        ])
+    ])
+    
 def viz2_html_lollipop(fig):
     markdown_title="""
     ## How does the Argentine team compare to its opponents in terms of performance at the 2022 World Cup?
     """
     markdown_text = """
      
-    This data visualization show Argentina's performance against its opponents during the 2022 World Cup, 
-    focusing on sixfour key metrics: possession, passing accuracy, shots on target, saves, Cards and Goals. 
-    Overall, Argentina had a strong performance in the tournament, winning 6 out of 7 matches and scoring 23 goals.
+    The data provided in the table gives an overview of how the Argentine team performed against each of its opponents during the 2022 World Cup. 
+    It also shows the performance of each opponent against Argentina. 
+    The metrics used to compare the performance include possession, passing accuracy, shots on target, saves, and goal per shot. 
+    The Median_Performance and Mean_Performance columns show the median and mean values of the performance metrics for Argentina against each opponent.
     
-    This heatmap is sorted in order of the Top Offenders base on all matches Goals result.
+    we analyze here the mean and median values for each performance metric (Possession, Passing Accuracy, Shots on Target, Saves, and Goal per Shot) of Argentina and its opponents at the 2022 World Cup.
+    
+    This lollipop is sorted in order of the Top Offenders base on all matches Goals result.
     
 
     """

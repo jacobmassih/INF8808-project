@@ -1,22 +1,34 @@
 import plotly.graph_objects as go
-import plotly.express as px
 
-def create_lollipop(lollipop_data):
-    # reset the multi-level index to make it a regular dataframe with one-level index
-    lollipop_data = lollipop_data.reset_index()
-
-    # create the plot
+def create_lollipop(lollipop_data):  
+    lollipop_data= lollipop_data.sort_values(by = ['Opponent'],
+                    ascending = False).iloc[0:15].reset_index() 
     fig = go.Figure()
-
-    # add markers and lines
-    fig.add_trace(go.Scatter(x=lollipop_data['Value'], y=lollipop_data['Full Name Metric'], mode='markers+lines', marker=dict(symbol='circle', size=5), line=dict(width=2)))
-
-    # add lollipop sticks
-    fig.add_trace(go.Scatter(x=[lollipop_data['Value'].min(), lollipop_data['Value'].max()], y=[lollipop_data['Full Name Metric'], lollipop_data['Full Name Metric']], mode='lines', line=dict(color='gray', dash='dash')))
-
-    # add title and axis labels
-    fig.update_layout(title='Argentina World Cup Performance', xaxis_title='Metric Value', yaxis_title='Full Name Metric')
-
+    fig.add_trace(go.Scatter(x = lollipop_data["Median_Performance"], 
+                          y = lollipop_data["Opponent"],
+                          mode = 'markers',
+                          marker_color ='darkblue',
+                          marker_size  = 10,
+                          name = 'Median'))
+    
+    fig.add_trace(go.Scatter(x = lollipop_data["Mean_Performance"], 
+                          y = lollipop_data["Opponent"],
+                          mode = 'markers',
+                          marker_color = 'darkorange', 
+                          marker_size = 10,
+                          name = 'Mean'))
+    for i in range(0, len(lollipop_data)):
+               fig.add_shape(type='line',
+                              x0 = lollipop_data["Median_Performance"][i],
+                              y0 = i,
+                              x1 = lollipop_data["Mean_Performance"][i],
+                              y1 = i,
+                              line=dict(color='crimson', width = 3))
+    fig.update_layout(title_text = 
+                    "Argentina World Cup Performance",
+                    title_font_size = 30)
+    fig.update_xaxes(title = 'Performance' , range=[0, 79])
+    fig.update_yaxes(autorange="reversed")
     return fig
 
 
