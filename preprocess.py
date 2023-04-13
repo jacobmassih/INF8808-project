@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from scipy import stats
+# from scipy import stats
 
 
 def viz1_get_results(scores_and_fixtures_df):
