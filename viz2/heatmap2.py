@@ -1,8 +1,6 @@
 import plotly.express as px
 
 def create_heatmap(heatmap_data):
-    print ("in funct ion heatmap2")
-    print(heatmap_data)
     fig = px.imshow(heatmap_data.values,
                     x=heatmap_data.columns,
                     y=heatmap_data.index,

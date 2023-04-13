@@ -33,16 +33,13 @@ def viz2_get_MatchReport_for_heatmap(MatchReport_df):
 
 def viz2_get_MatchReport_for_lollipop(MatchReport_df):
     MatchReport_df['Goal per Shot Against Argentina'] = MatchReport_df['Goal per Shot Against Argentina'].apply(lambda x: x * 100)     
-    print(MatchReport_df)   
     MatchReport_df['Goal per Shot For Argentina'] = MatchReport_df['Goal per Shot For Argentina'].apply(lambda x: x * 100)
     new_df = pd.DataFrame()
     for _, row in MatchReport_df.iterrows():
             # Create a copy of the row
             new_row = row.copy()
-                    
             # Rename the Opponent column of the new row
-            new_row['Opponent'] = 'Performance of Argentina Against ' + new_row['Opponent']
-                    
+            new_row['Opponent'] = 'Performance of Argentina Against ' + new_row['Opponent']  
             # Modify the other columns of the new row as needed
             new_row['Possession Against Argentina'] = new_row['Possession For Argentina']
             new_row['Passing Accuracy Against Argentina'] = new_row['Passing Accuracy For Argentina']
@@ -53,33 +50,26 @@ def viz2_get_MatchReport_for_lollipop(MatchReport_df):
             
             # Append the modified row to the new DataFrame
             new_df = new_df.append(new_row, ignore_index=True)
-
+            
     # Concatenate the original DataFrame with the new DataFrame
     MatchReport_df = pd.concat([MatchReport_df, new_df], ignore_index=True)
-
-    
     for idx, row in MatchReport_df.iterrows():
     # Check if the opponent name starts with 'Performance'
         if 'Performance' not in row['Opponent']:
         # Rename the opponent name
             MatchReport_df.at[idx, 'Opponent'] = 'Performance of ' + row['Opponent'] + ' Against Argentina'
-
     MatchReport_df = MatchReport_df.sort_values('Opponent')
     MatchReport_df= MatchReport_df.drop(['Possession For Argentina','Passing Accuracy For Argentina','Shots On Target For Argentina','Saves For Argentina','Passing Accuracy For Argentina','Goal per Shot For Argentina','Goal Against Argentina','Goal For Argentina'], axis=1)
     MatchReport_df = MatchReport_df.rename(columns=lambda x: x.replace(' Against Argentina', ''))
     MatchReport_df['Median_Performance'] = MatchReport_df.median(axis=1)
     MatchReport_df['Mean_Performance'] = MatchReport_df.mean(axis=1)
     lollipop_data = MatchReport_df
-    print("loliipop data")
-    print (lollipop_data)
     return lollipop_data
 
 def viz2_get_MatchReport_for_heatmap2(MatchReport_df):
     data = MatchReport_df
     data['Goal per Shot Against Argentina'] = data['Goal per Shot Against Argentina'].apply(lambda x: x * 100)     
     data['Goal per Shot For Argentina'] = data['Goal per Shot For Argentina'].apply(lambda x: x * 100)
-    print("in heatmap2")
-    print(data)
     new_df = pd.DataFrame()
     for _, row in data.iterrows():
             # Create a copy of the row
@@ -109,15 +99,9 @@ def viz2_get_MatchReport_for_heatmap2(MatchReport_df):
     data = data.rename(columns=lambda x: x.replace(' Against Argentina', ''))
     data['Median_Performance'] = data.median(axis=1).round(2)
     data['Mean_Performance'] = data.mean(axis=1).round(2)
-    print("in heatmap2 after mean")
-    print(data)
-    
     heatmap2_data = data
     heatmap2_data = heatmap2_data.set_index('Opponent')
     heatmap2_data_sorted = heatmap2_data.sort_values(by=('Mean_Performance'), ascending=False)
-    
-    print("in heatmap2 after mean and data sorted")
-    print(heatmap2_data_sorted)
     return heatmap2_data_sorted
 
 
