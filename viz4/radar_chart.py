@@ -1,49 +1,21 @@
 import plotly.graph_objects as go
-import numpy as np
+# import numpy as np
+import plotly.express as px
+import pandas as pd
+import plotly.io as pio
+import assets.shared_styles.colors as colors
 
 
 def get_fig(data):
-    
-    # Define the categories
-    categories = ['SoT%', 'Cmp%', 'TklW%', 'GCR', 'Save%', 'Poss']
-    data = [90, 75, 82, 80, 85]
-    # Define the angles for the custom angular axis
-    angles = np.linspace(0, 2*np.pi, len(categories), endpoint=False)
+    fig = go.Figure(data=go.Scatterpolar(
+        r=[data['SoT%'][0], data['Cmp%'][0], data['TklW/Tkl'][0], data['G/Sh'][0], data['Save%'][0], data['Poss'][0]],
+        theta=['Shots on target %','Pass completion %','Successful tackle %','Goal conversion rate', 'Save %', 'Possession'],
+        fill='toself'
 
-    # Add the first category to the end of the list to close the polygon
-    categories = categories + [categories[0]]
-    data = data + [data[0]]
-    
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatterpolar(
-            r=data,
-            theta=categories,
-            fill='toself',
-            line=dict(color='#000000'),
-            subplot='polar1'
-        )
-    )
+        ))
 
     fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 100]
-            ),
-            angularaxis=dict(
-                direction='clockwise',
-                tickmode='array',
-                tickvals=angles,
-                ticktext=[''] + categories[:-1] + [''],
-                rotation=30,
-                showline=False,
-                showgrid=True
-            ),
-            sector=[0, 2*np.pi],
-        ),
-        showlegend=False
+        template=pio.templates['ggplot2+viz4_template']
     )
 
     return fig

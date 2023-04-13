@@ -18,7 +18,10 @@ def init_figure():
         legend_title_text='Type'
     )
 
-    fig.update_yaxes(title_text='Values',)
+    fig.update_yaxes(
+        title_text='Values',
+        range=[0, 5]
+        )
 
     return fig
 

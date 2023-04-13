@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from scipy import stats
+# from scipy import stats
 
 
 def viz1_get_results(scores_and_fixtures_df):
@@ -132,13 +132,13 @@ def viz3_get_offensive_stats(shooting_df, passing_df, gca_df):
     return df
 
 
-def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df):
+def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possession_df, s_n_f_df):
     sot = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['SoT%']]
     
     cmp = passing_df.loc[passing_df['Player'] == 'Squad Total', ['Cmp%']]
     
     tkl_tklw = def_act_df.loc[def_act_df['Player'] == 'Squad Total', ['Tkl', 'TklW']]
-    tkl_tklw['TklW/Tkl'] = tkl_tklw['TklW'] / tkl_tklw['Tkl'] * 100
+    tkl_tklw['TklW/Tkl'] = round(tkl_tklw['TklW'] / tkl_tklw['Tkl'] * 100, 1)
     tkl_tklw = tkl_tklw.drop(['Tkl', 'TklW'], axis=1)
     
     save = goalkeeping_df.loc[goalkeeping_df['Player'] == 'Squad Total', ['Save%']]
@@ -147,13 +147,13 @@ def viz4_get_stats(shooting_df, passing_df, def_act_df, goalkeeping_df, possessi
     poss = possession_df['Poss']
     poss = possession_df['Poss'].iloc[11]
     
-    conversion = shooting_df.loc[shooting_df['Player'] == 'Squad Total', ['Gls', 'Sh']]
-    conversion['Conversion'] = conversion['Gls'] / conversion['Sh'] * 100
-    conversion = conversion.drop(['Gls', 'Sh'], axis=1)
+    g_p_sh = s_n_f_df['G/Sh']
+    g_p_sh = s_n_f_df['G/Sh'].iloc[11] * 100
     
-    df = pd.concat([sot, cmp, tkl_tklw, conversion], axis=1).reset_index(drop=True)
+    df = pd.concat([sot, cmp, tkl_tklw], axis=1).reset_index(drop=True)
     df = pd.concat([df,save], axis=1)
     df['Poss'] = poss
+    df['G/Sh'] = g_p_sh
     
     return df
 
