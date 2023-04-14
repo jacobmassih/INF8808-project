@@ -7,7 +7,9 @@ PRIMARY_COLORS = {
 SECONDARY_COLORS = {
     'light_blue': '#AEDDF8',  # light blue
     'light_gold': '#F3DFA5',  # light gold
-    'light_navy_blue': '#3772B4'   # light navy blue
+    'light_navy_blue': '#3772B4',   # light navy blue
+    'lighter_gold' : '#FFFAE0'
+
 }
 
 BACKGROUND_COLOR = '#FFFFFF'
