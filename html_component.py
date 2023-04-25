@@ -1,5 +1,4 @@
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 from viz1.modes import MODES
 
 def welcome_page():
