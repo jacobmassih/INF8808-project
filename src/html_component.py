@@ -101,8 +101,8 @@ def viz3_html(fig):
     """
 
     markdown_text = """
-    Argentina is known for their offensive prowess with world-class players such as Lionel Messi and Angel Di Maria dominating any pitch they compete on. 
-    In such manners, we have chosen 3 key metrics that best represent a well rounded attacking player.
+    Argentina is known for its offensive prowess with world-class players such as Lionel Messi and Angel Di Maria dominating any pitch they compete on. 
+    In such manner, we have chosen 3 key metrics that best represent a well-rounded attacking player.
     
     
     *Goal-creating actions: The last two offensive actions directly leading to a goal. These can be passes, take-ons and drawing fouls.*
@@ -162,7 +162,7 @@ def viz5_html(fig):
     """
 
     markdown_text = """
-        An efficient scorer is a player who manages to score goals needing less shots.
+        An efficient scorer is a player who manages to score goals while making fewer shots.
     """
 
     return html.Div(className='page-container', children=[
