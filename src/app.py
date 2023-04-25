@@ -12,6 +12,7 @@ import html_component as html_component
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = "Projet 8808"
+server = app.server
 
 SCORES_AND_FIXTURES = pd.read_csv('./data/scores_and_fixtures.csv')
 SHOOTING = pd.read_csv('./data/shooting.csv')
