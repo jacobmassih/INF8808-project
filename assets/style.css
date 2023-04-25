@@ -45,14 +45,15 @@
     flex-direction: column;
 }
 
+.radio-container{
+    margin-top: 1rem;
+}
+
 .graph-container {
     flex: 1 1 auto;
 }
 
-.radio-group {
-    margin-bottom: 3rem;
-    flex: 0 1 auto;
-}
+
 
 .radio-group-text {
     margin-bottom: 1rem;
@@ -62,13 +63,11 @@
     display: none;
 }
 
-.radio-container {
-    position: relative;
-    margin: 0 auto;
-    width: fit-content;
-}
-
 .radio-items {
     display: flex;
     flex-direction: row;
+}
+
+span, p {
+    margin-left: 1rem;
 }

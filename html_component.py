@@ -19,12 +19,41 @@ def welcome_page():
     ])
 
 def viz1_html(fig):
-    markdown_text = """
-    ## What are Argentina's National Team's results from the 2022 World Cup?
-
-    """
     return html.Div(className='page-container', children=[
-        dcc.Markdown(children=markdown_text),
+        dcc.Markdown(children="""
+            ## What are Argentina's National Team's results from the 2022 World Cup?
+        """),
+
+        html.Div(className='radio-group', children=[
+            html.Div(className='radio-group-text', id='info', children=[
+                html.Span(MODES['goals'], id='mode', className='metric-text')
+            ]),
+            html.Div(className='radio-container', children=[
+                html.Div(className='radio-items', children=[                            
+                    html.Span(
+                        'Metric :',
+                        style={
+                            'margin-right': 10
+                            }),
+                    dcc.RadioItems(
+                        id='radio-items',
+                        options=[
+                            dict(
+                                label=[
+                                    MODES[mode],
+                                    html.Span(style={
+                                        'margin-right': 10
+                                        })
+                                    ],
+                                value=MODES[mode]) for mode in MODES
+                        ],
+                        value=MODES['goals'],
+                        inline=True
+                    )
+                ])
+            ])
+        ]),
+
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
                 dcc.Graph(
@@ -40,35 +69,6 @@ def viz1_html(fig):
                     id='bar-chart'
                 )
             ]),
-            html.Div(className='radio-group', children=[
-                html.Div(className='radio-group-text', id='info', children=[
-                    html.Span(MODES['goals'], id='mode', className='metric-text')
-                ]),
-                html.Div(className='radio-container', children=[
-                    html.Div(className='radio-items', children=[                            
-                        html.Span(
-                            'Metric :',
-                            style={
-                                'margin-right': 10
-                                }),
-                        dcc.RadioItems(
-                            id='radio-items',
-                            options=[
-                                dict(
-                                    label=[
-                                        MODES[mode],
-                                        html.Span(style={
-                                            'margin-right': 10
-                                            })
-                                        ],
-                                    value=MODES[mode]) for mode in MODES
-                            ],
-                            value=MODES['goals'],
-                            inline=True
-                        )
-                    ])
-                ])
-            ])
         ])
     ])
     
@@ -77,13 +77,10 @@ def viz2_html_heatmap(fig):
     ## How did Argentina perform in each game?
     """
     markdown_text = """
-     
     The Albiceleste started off on the wrong foot in the World Cup 2022, losing their first match as one of the tournament favorites against Saudi Arabia. However, they 
     soon picked up the pace and took the crown from reigning champions France. Argentina had an overall strong performance throughout the tournament.
 
-    It should be noted that the save percentage against Poland is unavailable as Robert Lewandowski's side failed to take any shots on target, meaning no saves were necessary. 
-    
-
+    It should be noted that the save percentage against Poland is unavailable as Robert Lewandowski's side failed to take any shots on target, meaning no saves were necessary.
     """
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
@@ -111,7 +108,6 @@ def viz3_html(fig):
     """
 
     markdown_text = """
-     
     Argentina is known for their offensive prowess with world-class players such as Lionel Messi and Angel Di Maria dominating any pitch they compete on. 
     In such manners, we have chosen 3 key metrics that best represent a well rounded attacking player.
     
