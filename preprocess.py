@@ -27,7 +27,7 @@ def viz2_hm1(possession_data, passing_data, s_n_f_data, gk_per_game_data):
     df = pd.concat([poss, passing, sot_perc, gcr, save_perc], axis=1)
     df = df.dropna(subset=['Opponent'])
     df = df.set_index('Opponent')
-    df = df.rename(columns={'Poss': 'Possession (%)', 'Cmp%': 'Pass completion rate (%)', 'SoT%': 'Shots on target (%)', 'G/Sh': 'Goal conversion rate (%)', 'Save%': 'Saves (%)'})
+    df = df.rename(columns={'Poss': 'Possession (%)', 'Cmp%': 'Pass Completion Rate (%)', 'SoT%': 'Shots on Target (%)', 'G/Sh': 'Goal Conversion Rate (%)', 'Save%': 'Saves (%)'})
 
     return df
 

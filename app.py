@@ -1,5 +1,4 @@
-from dash import Dash, html, dcc, callback, Output, Input, State
-import plotly.express as px
+from dash import Dash, html, Output, Input, State
 import pandas as pd
 import dash_bootstrap_components as dbc
 
@@ -20,7 +19,7 @@ PASSING = pd.read_csv('./data/passing.csv')
 GOAL_AND_SHOT_CREATION = pd.read_csv('./data/goal_and_shot_creation.csv')
 DEFENSIVE = pd.read_csv('./data/defensive.csv')
 GOALKEEPING = pd.read_csv('./data/goalkeeping.csv')
-POSESSION = pd.read_csv('./data/possession.csv')
+POSSESSION = pd.read_csv('./data/possession.csv')
 PASSING_PER_MATCH = pd.read_csv('./data/passing_per_match.csv')
 GOALKEEPING_PER_MATCH = pd.read_csv('./data/gk_per_game.csv')
 
@@ -30,22 +29,21 @@ GOALKEEPING_PER_MATCH = pd.read_csv('./data/gk_per_game.csv')
     [State('bar-chart', 'figure')]
 )
 def radio_updated(mode, figure):
-    new_fig = bar_chart.update_y_axis(figure, mode)
-    new_fig = bar_chart.draw(new_fig, viz1_data, mode)
+    new_fig = bar_chart.draw(figure, viz1_data, mode)
 
     return new_fig, mode
 
 
 # DATA
 viz1_data = preprocess.viz1_get_results(SCORES_AND_FIXTURES)
-viz2_data_hm1 = preprocess.viz2_hm1(POSESSION, PASSING_PER_MATCH, SCORES_AND_FIXTURES, GOALKEEPING_PER_MATCH)
+viz2_data = preprocess.viz2_hm1(POSSESSION, PASSING_PER_MATCH, SCORES_AND_FIXTURES, GOALKEEPING_PER_MATCH)
 viz3_data = preprocess.viz3_get_offensive_stats(SHOOTING, PASSING, GOAL_AND_SHOT_CREATION)
-viz4_data = preprocess.viz4_get_stats(SHOOTING, PASSING, DEFENSIVE, GOALKEEPING, POSESSION, SCORES_AND_FIXTURES)
+viz4_data = preprocess.viz4_get_stats(SHOOTING, PASSING, DEFENSIVE, GOALKEEPING, POSSESSION, SCORES_AND_FIXTURES)
 viz5_data = preprocess.viz5_get_stats(SHOOTING)
 
 # CHARTS
 viz1 = bar_chart.init_figure()
-viz2_heatmap = heatmap.create_heatmap(viz2_data_hm1)
+viz2 = heatmap.create_heatmap(viz2_data)
 viz3 = bubble_chart.get_fig(viz3_data)
 viz4 = radar_chart.get_fig(viz4_data)
 viz5 = horizontal_bar_chart.get_horizontal_bar_chart(viz5_data)
@@ -55,7 +53,7 @@ viz5 = horizontal_bar_chart.get_horizontal_bar_chart(viz5_data)
 app.layout = html.Div(children=[
     html_component.welcome_page(),
     html_component.viz1_html(viz1),
-    html_component.viz2_html_heatmap(viz2_heatmap),
+    html_component.viz2_html(viz2),
     html_component.viz3_html(viz3),
     html_component.viz4_html(viz4),
     html_component.viz5_html(viz5)

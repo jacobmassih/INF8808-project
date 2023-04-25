@@ -1,40 +1,33 @@
 from dash import html, dcc
 from viz1.modes import MODES
 
+image_path = "assets/header.jpg"
+
 def welcome_page():
     return html.Div(className='welcome-page-container', children=[
-        html.Div(className='upper-part', children=[
+        html.Img(className='header-img', src=image_path),
+        html.Div(className='content', children=[
             html.Div(className='welcome-title', children=[
                 'Examining Argentina\'s Performance in the 2023 World Cup: A Statistical Analysis'
-            ])
-        ]),
-        html.Div(className='lower-part', children=[
-            html.Div(className='welcome-text', children=[
-                'INF8808'
-            ]),
-            html.Div(className='welcome-text', children=[
-                'DATA VISUALIZATION'
             ])
         ]),
     ])
 
 def viz1_html(fig):
+    markdown_title="""
+    ## How Did Argentina Perform Compared to Expectation?
+    """
     return html.Div(className='page-container', children=[
-        dcc.Markdown(children="""
-            ## What are Argentina's National Team's results from the 2022 World Cup?
-        """),
-
+        dcc.Markdown(className='markdown-title', children=markdown_title),
         html.Div(className='radio-group', children=[
             html.Div(className='radio-group-text', id='info', children=[
-                html.Span(MODES['goals'], id='mode', className='metric-text')
+                html.Span(MODES['goals'], className='metric-text')
             ]),
             html.Div(className='radio-container', children=[
                 html.Div(className='radio-items', children=[                            
                     html.Span(
                         'Metric :',
-                        style={
-                            'margin-right': 10
-                            }),
+                        style={ 'margin-right': 10, 'text-decoration' : 'underline' }),
                     dcc.RadioItems(
                         id='radio-items',
                         options=[
@@ -53,11 +46,10 @@ def viz1_html(fig):
                 ])
             ])
         ]),
-
         html.Div(className='app-container', children=[
+            html.Div(className='y-axis-title', id='mode'),
             html.Div(className='graph-container', children=[
                 dcc.Graph(
-                    className='graph',
                     figure=fig,
                     config=dict(
                         scrollZoom=False,
@@ -72,21 +64,22 @@ def viz1_html(fig):
         ])
     ])
     
-def viz2_html_heatmap(fig):
+def viz2_html(fig):
     markdown_title="""
-    ## How did Argentina perform in each game?
+    ## How Did Argentina Perform In Each Game?
     """
     markdown_text = """
     The Albiceleste started off on the wrong foot in the World Cup 2022, losing their first match as one of the tournament favorites against Saudi Arabia. However, they 
     soon picked up the pace and took the crown from reigning champions France. Argentina had an overall strong performance throughout the tournament.
 
-    It should be noted that the save percentage against Poland is unavailable as Robert Lewandowski's side failed to take any shots on target, meaning no saves were necessary.
+    *It should be noted that the save percentage against Poland is unavailable as Robert Lewandowski's side failed to take any shots on target, meaning no saves were necessary.*
     """
     return html.Div(className='page-container', children=[
+        dcc.Markdown(className='markdown-title', children=markdown_title),
+        dcc.Markdown(children=markdown_text),
         html.Div(className='app-container', children=[
+            html.Div(className='y-axis-title', children=['Opponent']),
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_title),
-                dcc.Markdown(children=markdown_text),
                 dcc.Graph(
                     id='Heatmap',
                     figure=fig,
@@ -104,7 +97,7 @@ def viz2_html_heatmap(fig):
     
 def viz3_html(fig):
     markdown_title="""
-    ## Which offensive player contributed the most to Argentina's success?
+    ## Which Offensive Player Contributed the most to Argentina's Success?
     """
 
     markdown_text = """
@@ -112,19 +105,19 @@ def viz3_html(fig):
     In such manners, we have chosen 3 key metrics that best represent a well rounded attacking player.
     
     
-    GCA (Goal-creating actions): The last two offensive actions directly leading to a goal. These can be passes, take-ons and drawing fouls.
+    *Goal-creating actions: The last two offensive actions directly leading to a goal. These can be passes, take-ons and drawing fouls.*
 
-    KP (Key passes): Passes that lead directly to a shot
+    *Key passes: Passes that lead directly to a shot*
     
-    Gls (Goals): Number of goals scored by the player (penalty and non-penalties included)
+    *Goals: Number of goals scored by the player (penalty and non-penalties included)*
     """
-    # pour les fonts, checker dans asssets. on a 4 fonts dans le projet. si vous voulez dautres, faut download.
-    style = {'font-family': 'Arial, sans-serif', 'font-size': '16px', 'text-align' : 'left'}
+    
     return html.Div(className='page-container', children=[
+        dcc.Markdown(className='markdown-title', children=markdown_title),
+        dcc.Markdown(children=markdown_text),
         html.Div(className='app-container', children=[
+            html.Div(className='y-axis-title', children=['Goal-Creating Actions']),
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_title),
-                dcc.Markdown(children=markdown_text),
                 dcc.Graph(
                     id='bubble-chart',
                     figure=fig,
@@ -140,15 +133,14 @@ def viz3_html(fig):
         ])
     ])
     
-# vy - i'll be right back if yall dont sleep
 def viz4_html(fig):
     markdown_text = """
-    ## What were Argentina's strengths and weaknesses?
+    ## What Were Argentina's Strengths and Weaknesses?
     """
     return html.Div(className='page-container', children=[
+        dcc.Markdown(className='markdown-title', children=markdown_text),
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_text),
                 dcc.Graph(
                     id='radar-chart',
                     figure=fig,
@@ -166,12 +158,12 @@ def viz4_html(fig):
     
 def viz5_html(fig):
     markdown_text = """
-    ## Who are the most efficient scorers?
+    ## Who Are the Most Efficient Scorers?
     """
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
-                dcc.Markdown(children=markdown_text),
+                dcc.Markdown(className='markdown-title', children=markdown_text),
                 dcc.Graph(
                     id='horizontal-bar-chart',
                     figure=fig,

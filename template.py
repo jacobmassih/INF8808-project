@@ -11,30 +11,30 @@ def create_template():
 
     #VIZ 4
     template = go.layout.Template({
-    'data': {
-        'scatterpolar': [{
-            'line': {'color': colors.PRIMARY_COLORS['gold'] },
-            'marker': {'color': colors.SECONDARY_COLORS['lighter_gold']},
-        }],
-    },
-    'layout': {
-        'polar': {
-            'radialaxis': {
-                'range': [0, 100],
-                'tickvals': [20, 40, 60, 80, 100],
-            },
-            'angularaxis': {
-                'tickfont': {'size': 12},
-                'direction':"clockwise",
-                'rotation': 30
-            },
+        'data': {
+            'scatterpolar': [{
+                'line': {'color': colors.PRIMARY_COLORS['gold'] },
+                'marker': {'color': colors.SECONDARY_COLORS['lighter_gold']},
+            }],
         },
-        'font': {'size': 14},
-        'showlegend': False,
-        'dragmode': False,
-        'width':600, 
-        'height':600
-    },
+        'layout': {
+            'polar': {
+                'radialaxis': {
+                    'range': [0, 100],
+                    'tickvals': [20, 40, 60, 80, 100],
+                },
+                'angularaxis': {
+                    'tickfont': {'size': 12},
+                    'direction':"clockwise",
+                    'rotation': 30
+                },
+            },
+            'font': {'size': 14},
+            'showlegend': False,
+            'dragmode': False,
+            'width':600, 
+            'height':600
+        },
     })
     
     pio.templates['viz4_template'] = template
