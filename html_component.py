@@ -8,7 +8,7 @@ def welcome_page():
         html.Img(className='header-img', src=image_path),
         html.Div(className='content', children=[
             html.Div(className='welcome-title', children=[
-                'Examining Argentina\'s Performance in the 2023 World Cup: A Statistical Analysis'
+                'Examining Argentina\'s Performance in the 2022 World Cup: A Statistical Analysis'
             ])
         ]),
     ])
@@ -157,12 +157,18 @@ def viz4_html(fig):
     ])
     
 def viz5_html(fig):
-    markdown_text = """
+    markdown_title = """
     ## Who Are the Most Efficient Scorers?
     """
+
+    markdown_text = """
+        An efficient scorer is a player who manages to score goals needing less shots.
+    """
+
     return html.Div(className='page-container', children=[
         html.Div(className='app-container', children=[
             html.Div(className='graph-container', children=[
+                dcc.Markdown(className='markdown-title', children=markdown_title),
                 dcc.Markdown(className='markdown-title', children=markdown_text),
                 dcc.Graph(
                     id='horizontal-bar-chart',
