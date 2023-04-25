@@ -1,7 +1,7 @@
 PRIMARY_COLORS = {
-    'blue': '#43A1D5',  # blue
+    'navy_blue': '#173E69',  # navy blue
     'gold': '#D5B048',  # gold
-    'navy_blue': '#173E69'  # navy blue
+    'blue': '#43A1D5',  # blue
 }
     
 SECONDARY_COLORS = {
